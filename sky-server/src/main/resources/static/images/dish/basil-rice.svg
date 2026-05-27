@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
-  <rect width="320" height="240" rx="28" fill="#f0a85e"/>
-  <ellipse cx="160" cy="128" rx="86" ry="58" fill="#fff7df"/>
-  <circle cx="132" cy="116" r="18" fill="#9b4d2f"/>
-  <circle cx="165" cy="104" r="16" fill="#b85c38"/>
-  <circle cx="190" cy="133" r="20" fill="#7d3f2a"/>
-  <path d="M121 145c25-20 56-19 78 0" fill="none" stroke="#2e7d4f" stroke-width="12" stroke-linecap="round"/>
-  <text x="160" y="218" text-anchor="middle" font-family="Arial" font-size="24" fill="#4a2d16">打抛饭</text>
-</svg>

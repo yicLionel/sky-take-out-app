@@ -60,10 +60,6 @@ function showToast(message) {
   }, 1800)
 }
 
-function money(value) {
-  return Number(value || 0).toFixed(2)
-}
-
 function statusText(status) {
   if (status === 1) return '待支付'
   if (status === 2) return '已支付'
@@ -123,13 +119,12 @@ function renderLoading() {
 
 function renderOrders() {
   const paidCount = state.orders.filter((order) => order.status === 2).length
-  const totalAmount = state.orders.reduce((sum, order) => sum + Number(order.amount || 0), 0)
   admin.innerHTML = `
     <section class="screen no-tab">
       <header class="topbar">
         <div class="title-block">
           <h1>商家订单</h1>
-          <p>${state.orders.length} 单 · 已支付 ${paidCount} 单 · ￥${money(totalAmount)}</p>
+          <p>${state.orders.length} 单 · 已支付 ${paidCount} 单</p>
         </div>
         <button class="ghost-btn" data-action="refresh">刷新</button>
       </header>
@@ -147,12 +142,10 @@ function renderOrders() {
               ${(order.orderDetails || []).map((item) => `
                 <div class="detail-line">
                   <span>${item.name} x${item.number}</span>
-                  <strong>￥${money(Number(item.amount) * item.number)}</strong>
                 </div>
               `).join('')}
             </div>
             <div class="total-row">
-              <strong class="price">￥${money(order.amount)}</strong>
               <span>
                 <button class="ghost-btn" data-action="setStatus" data-id="${order.id}" data-status="3">完成</button>
                 <button class="danger-btn" data-action="setStatus" data-id="${order.id}" data-status="4">取消</button>

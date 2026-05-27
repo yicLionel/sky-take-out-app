@@ -94,14 +94,14 @@ function showToast(message) {
   }, 1800)
 }
 
-function money(value) {
-  return Number(value || 0).toFixed(2)
-}
-
 function imageUrl(path) {
   if (!path) return ''
   if (path.startsWith('http')) return path
   return state.baseUrl + path
+}
+
+function itemCountText(count) {
+  return count ? `${count} 件` : '购物车'
 }
 
 function statusText(status) {
@@ -188,7 +188,6 @@ function loadItems(categoryId, type) {
 
 function renderMenu() {
   const cartCount = state.cart.reduce((sum, item) => sum + item.number, 0)
-  const cartTotal = state.cart.reduce((sum, item) => sum + Number(item.amount) * item.number, 0)
   const content = `
     <header class="topbar">
       <div class="title-block">
@@ -214,7 +213,6 @@ function renderMenu() {
               <h3>${item.name}</h3>
               <p class="desc">${item.description || item.flavorText || '经典热销'}</p>
               <div class="item-foot">
-                <span class="price">￥${money(item.price)}</span>
                 <button class="icon-btn" data-action="addItem" data-id="${item.id}" aria-label="加入购物车">+</button>
               </div>
             </div>
@@ -223,7 +221,7 @@ function renderMenu() {
       </section>
     </div>
     <div class="fab-cart">
-      <span>${cartCount} 件 · ￥${money(cartTotal)}</span>
+      <span>${itemCountText(cartCount)}</span>
       <button data-action="nav" data-view="cart">去结算</button>
     </div>
   `
@@ -238,7 +236,6 @@ function loadCart(render = false) {
 }
 
 function renderCart() {
-  const total = state.cart.reduce((sum, item) => sum + Number(item.amount) * item.number, 0)
   const content = `
     <header class="topbar">
       <h1 class="page-title">购物车</h1>
@@ -252,7 +249,6 @@ function renderCart() {
             <h3>${item.name}</h3>
             <p class="desc">${item.dishFlavor || '默认规格'}</p>
             <div class="cart-foot">
-              <span class="price">￥${money(Number(item.amount) * item.number)}</span>
               <span class="qty">
                 <button data-action="subCart" data-index="${index}">-</button>
                 ${item.number}
@@ -265,7 +261,7 @@ function renderCart() {
     </section>
     <section class="summary-card">
       <div class="total-row">
-        <strong>合计 ￥${money(total)}</strong>
+        <strong>${itemCountText(state.cart.reduce((sum, item) => sum + item.number, 0))}</strong>
         <button class="ghost-btn" data-action="nav" data-view="checkout">提交订单</button>
       </div>
     </section>
@@ -285,7 +281,6 @@ function loadCheckout() {
 }
 
 function renderCheckout() {
-  const total = state.cart.reduce((sum, item) => sum + Number(item.amount) * item.number, 0)
   const address = state.defaultAddress
   const content = `
     <header class="topbar">
@@ -303,7 +298,6 @@ function renderCheckout() {
       ${state.cart.map((item) => `
         <div class="detail-line">
           <span>${item.name} x${item.number}</span>
-          <strong>￥${money(Number(item.amount) * item.number)}</strong>
         </div>
       `).join('') || '<div class="empty">购物车为空</div>'}
     </section>
@@ -311,7 +305,7 @@ function renderCheckout() {
       <span>备注</span>
       <textarea data-bind="remark">${state.remark || ''}</textarea>
     </label>
-    <button class="primary-btn" data-action="submitOrder">支付 ￥${money(total)}</button>
+    <button class="primary-btn" data-action="submitOrder">提交订单</button>
   `
   renderShell(content, 'cart')
 }
@@ -383,7 +377,6 @@ function renderOrders() {
           <p class="order-meta">${order.orderTime || ''}</p>
           <div class="total-row">
             <span>${order.consignee || ''}</span>
-            <strong class="price">￥${money(order.amount)}</strong>
           </div>
         </article>
       `).join('') : '<div class="empty">暂无订单</div>'}
@@ -420,13 +413,8 @@ function renderOrderDetail() {
       ${(order.orderDetails || []).map((item) => `
         <div class="detail-line">
           <span>${item.name} x${item.number}</span>
-          <strong>￥${money(Number(item.amount) * item.number)}</strong>
         </div>
       `).join('')}
-      <div class="detail-line">
-        <span>总计</span>
-        <strong class="price">￥${money(order.amount)}</strong>
-      </div>
     </section>
   `
   renderShell(content, 'orders')

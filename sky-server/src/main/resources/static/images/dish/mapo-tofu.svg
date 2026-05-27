@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
-  <rect width="320" height="240" rx="28" fill="#d65a3a"/>
-  <ellipse cx="160" cy="131" rx="88" ry="56" fill="#8f2f24"/>
-  <rect x="112" y="100" width="38" height="32" rx="7" fill="#fff1c5"/>
-  <rect x="160" y="96" width="38" height="34" rx="7" fill="#ffe6ad"/>
-  <rect x="139" y="139" width="40" height="34" rx="7" fill="#fff1c5"/>
-  <circle cx="207" cy="136" r="10" fill="#5a211a"/>
-  <text x="160" y="218" text-anchor="middle" font-family="Arial" font-size="24" fill="#5a1d13">麻婆豆腐</text>
-</svg>
