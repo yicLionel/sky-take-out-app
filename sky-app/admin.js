@@ -5,6 +5,14 @@ const state = {
   activeOrder: null
 }
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations()
+    .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
+    .then(() => window.caches?.keys?.())
+    .then((keys) => Promise.all((keys || []).map((key) => window.caches.delete(key))))
+    .catch(() => {})
+}
+
 const admin = document.querySelector('#admin')
 const toast = document.querySelector('#toast')
 
@@ -30,6 +38,11 @@ function api(path, options = {}) {
     .then(async (res) => {
       const body = await res.json().catch(() => ({}))
       if (body.code === 1) return body.data
+      if (body.msg === 'ADMIN_TOKEN_ERROR') {
+        state.adminToken = ''
+        localStorage.removeItem('skyAdminToken')
+        throw new Error('商家口令错误，请重新输入')
+      }
       throw new Error(body.msg || '请求失败')
     })
     .catch((error) => {

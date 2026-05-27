@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sky-app-v2'
+const CACHE_NAME = 'sky-app-v3'
 const APP_ASSETS = [
   './',
   './index.html',
@@ -29,6 +29,10 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url)
   if (url.pathname.startsWith('/user/')) return
+  if (url.pathname === '/admin' || url.pathname.endsWith('/admin.html') || url.pathname.endsWith('/admin.js') || url.pathname.endsWith('/config.js')) {
+    event.respondWith(fetch(event.request))
+    return
+  }
 
   event.respondWith(
     caches.match(event.request).then((cached) => {
