@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+  <rect width="320" height="240" rx="28" fill="#b8a16a"/>
+  <ellipse cx="160" cy="132" rx="88" ry="58" fill="#fff0ca"/>
+  <rect x="111" y="113" width="82" height="24" rx="12" transform="rotate(-18 152 125)" fill="#a45f45"/>
+  <circle cx="112" cy="139" r="14" fill="#f0d4bd"/>
+  <circle cx="204" cy="109" r="14" fill="#f0d4bd"/>
+  <path d="M109 159c34 13 69 13 103 0" fill="none" stroke="#d6a76f" stroke-width="10" stroke-linecap="round"/>
+  <text x="160" y="218" text-anchor="middle" font-family="Arial" font-size="24" fill="#55421f">排骨汤</text>
+</svg>

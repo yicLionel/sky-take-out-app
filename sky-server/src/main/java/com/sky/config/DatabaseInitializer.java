@@ -2,6 +2,7 @@ package com.sky.config;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 
 @Component
+@Order(1)
 public class DatabaseInitializer implements ApplicationRunner {
     private final DataSource dataSource;
     private final JdbcTemplate jdbcTemplate;
