@@ -1,7 +1,7 @@
 {
-  "name": "苍穹外卖 App",
-  "short_name": "苍穹外卖",
-  "description": "苍穹外卖 Android 和 iOS 用户端",
+  "name": "颜小厨爱心厨房 App",
+  "short_name": "颜小厨爱心厨房",
+  "description": "颜小厨爱心厨房 Android 和 iOS 用户端",
   "start_url": "./index.html#/menu",
   "scope": "./",
   "display": "standalone",

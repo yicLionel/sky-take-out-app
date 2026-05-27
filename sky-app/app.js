@@ -132,7 +132,7 @@ function navHtml(active) {
 function renderLogin() {
   app.innerHTML = `
     <section class="login-hero">
-      <h1>苍穹外卖</h1>
+      <h1>颜小厨爱心厨房</h1>
       <p>App 端点餐、购物车、地址和订单闭环。</p>
       <div class="login-panel">
         <button class="primary-btn" data-action="login">一键登录</button>
