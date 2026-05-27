@@ -1,0 +1,36 @@
+name: sky-take-out
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: sky-take-out-mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: sky123456
+      MYSQL_DATABASE: sky_take_out
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - sky_mysql_data:/var/lib/mysql
+      - ./sky-server/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./sky-server/src/main/resources/data.sql:/docker-entrypoint-initdb.d/02-data.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-psky123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    container_name: sky-take-out-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - sky_redis_data:/data
+
+volumes:
+  sky_mysql_data:
+  sky_redis_data:

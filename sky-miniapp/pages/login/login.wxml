@@ -1,0 +1,8 @@
+<view class="login-page">
+  <view class="brand">
+    <view class="brand-mark">SKY</view>
+    <view class="brand-title">苍穹外卖</view>
+    <view class="brand-subtitle">移动端点餐 MVP</view>
+  </view>
+  <button class="primary-btn login-btn" bindtap="login" loading="{{loading}}">微信一键登录</button>
+</view>

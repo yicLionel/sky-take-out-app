@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+  <rect width="320" height="240" rx="28" fill="#f0c15b"/>
+  <ellipse cx="132" cy="122" rx="48" ry="30" transform="rotate(-24 132 122)" fill="#b85d2d"/>
+  <ellipse cx="190" cy="124" rx="52" ry="31" transform="rotate(20 190 124)" fill="#c76932"/>
+  <circle cx="104" cy="139" r="12" fill="#f6e6c8"/>
+  <circle cx="222" cy="143" r="12" fill="#f6e6c8"/>
+  <path d="M91 170h138" stroke="#79502e" stroke-width="12" stroke-linecap="round"/>
+  <text x="160" y="218" text-anchor="middle" font-family="Arial" font-size="24" fill="#66401f">黄金鸡翅</text>
+</svg>

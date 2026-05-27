@@ -1,0 +1,13 @@
+<view class="page profile-page">
+  <view class="profile-head">
+    <image class="avatar" src="{{avatar}}" mode="aspectFill"></image>
+    <view>
+      <view class="nickname">微信用户</view>
+      <view class="muted">苍穹外卖本地演示账号</view>
+    </view>
+  </view>
+
+  <button class="cell" bindtap="goAddress">收货地址</button>
+  <button class="cell" bindtap="goOrders">我的订单</button>
+  <button class="cell danger" bindtap="logout">退出登录</button>
+</view>

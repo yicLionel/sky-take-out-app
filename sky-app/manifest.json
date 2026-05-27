@@ -1,0 +1,19 @@
+{
+  "name": "苍穹外卖 App",
+  "short_name": "苍穹外卖",
+  "description": "苍穹外卖 Android 和 iOS 用户端",
+  "start_url": "./index.html#/menu",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7f8",
+  "theme_color": "#1f8a70",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

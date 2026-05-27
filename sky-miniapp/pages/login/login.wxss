@@ -1,0 +1,39 @@
+.login-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 120rpx 48rpx 48rpx;
+  background: #eef7f2;
+}
+
+.brand {
+  margin-bottom: 96rpx;
+}
+
+.brand-mark {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 24rpx;
+  background: #1f8a70;
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 120rpx;
+  text-align: center;
+}
+
+.brand-title {
+  margin-top: 36rpx;
+  color: #102820;
+  font-size: 56rpx;
+  font-weight: 700;
+}
+
+.brand-subtitle {
+  margin-top: 16rpx;
+  color: #5d6b65;
+  font-size: 28rpx;
+}
+
+.login-btn {
+  margin-top: 80rpx;
+}

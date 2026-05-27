@@ -1,0 +1,31 @@
+<view class="page checkout-page">
+  <view class="section">
+    <view class="section-title">收货地址</view>
+    <view wx:if="{{address}}" class="address" bindtap="goAddress">
+      <view class="address-name">{{address.consignee}} {{address.phone}}</view>
+      <view class="muted">{{address.provinceName}}{{address.cityName}}{{address.districtName}}{{address.detail}}</view>
+    </view>
+    <button wx:else class="ghost-btn" bindtap="goAddress">新增收货地址</button>
+  </view>
+
+  <view class="section">
+    <view class="section-title">商品明细</view>
+    <view wx:for="{{items}}" wx:key="id" class="line">
+      <view>{{item.name}} x {{item.number}}</view>
+      <view class="price">¥{{item.lineTotal}}</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">备注</view>
+    <input class="remark" value="{{remark}}" bindinput="onRemarkInput" placeholder="口味、餐具等要求" />
+  </view>
+
+  <view class="submit-bar">
+    <view>
+      <view class="muted">应付</view>
+      <view class="total">¥{{total}}</view>
+    </view>
+    <button class="primary-btn submit-btn" bindtap="submit" loading="{{submitting}}">提交并支付</button>
+  </view>
+</view>

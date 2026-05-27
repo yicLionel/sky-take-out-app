@@ -1,0 +1,13 @@
+.DS_Store
+target/
+*.log
+*.class
+.idea/
+.vscode/
+
+.mvn/apache-maven-*/
+.mvn/apache-maven-*.tar.gz
+
+sky-miniapp/miniprogram_npm/
+sky-miniapp/project.private.config.json
+sky-miniapp/.idea/

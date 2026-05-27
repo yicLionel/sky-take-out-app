@@ -1,0 +1,7 @@
+.git
+.mvn/wrapper/maven-wrapper.jar
+**/target
+sky-app
+sky-miniapp
+README.md
+.DS_Store

@@ -1,0 +1,31 @@
+<view class="page detail-page" wx:if="{{order}}">
+  <view class="detail-head">
+    <view class="detail-title">{{statusText}}</view>
+    <view class="muted">订单号 {{order.number}}</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">商品</view>
+    <view class="line" wx:for="{{order.orderDetails}}" wx:key="id">
+      <view>{{item.name}} x {{item.number}}</view>
+      <view class="price">¥{{item.amount}}</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">配送信息</view>
+    <view class="muted">{{order.consignee}} {{order.phone}}</view>
+    <view class="address">{{order.address}}</view>
+  </view>
+
+  <view class="section">
+    <view class="line">
+      <view>实付金额</view>
+      <view class="price">¥{{order.amount}}</view>
+    </view>
+    <view class="line">
+      <view>备注</view>
+      <view>{{order.remark || '无'}}</view>
+    </view>
+  </view>
+</view>

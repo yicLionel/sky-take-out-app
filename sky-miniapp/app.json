@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/menu/menu",
+    "pages/cart/cart",
+    "pages/checkout/checkout",
+    "pages/address/address",
+    "pages/orders/orders",
+    "pages/order-detail/order-detail",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationBarTitleText": "苍穹外卖",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f7f8"
+  },
+  "tabBar": {
+    "color": "#7c858c",
+    "selectedColor": "#1f8a70",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/menu/menu",
+        "text": "点餐"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/orders/orders",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

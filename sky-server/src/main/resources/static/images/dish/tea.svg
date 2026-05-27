@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+  <rect width="320" height="240" rx="28" fill="#93c9df"/>
+  <path d="M116 63h88l-13 128h-62z" fill="#f6fbff"/>
+  <path d="M124 112h72l-8 72h-56z" fill="#b96531"/>
+  <circle cx="142" cy="90" r="11" fill="#ffdd6e"/>
+  <circle cx="174" cy="92" r="12" fill="#ffdd6e"/>
+  <path d="M205 68l-32 58" stroke="#347846" stroke-width="8" stroke-linecap="round"/>
+  <text x="160" y="218" text-anchor="middle" font-family="Arial" font-size="24" fill="#174b60">柠檬红茶</text>
+</svg>

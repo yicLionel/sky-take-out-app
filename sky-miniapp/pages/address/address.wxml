@@ -1,0 +1,25 @@
+<view class="page address-page">
+  <view class="form">
+    <view class="form-title">新增地址</view>
+    <input class="field" placeholder="收货人" value="{{form.consignee}}" data-key="consignee" bindinput="onInput" />
+    <input class="field" placeholder="手机号" value="{{form.phone}}" data-key="phone" bindinput="onInput" />
+    <input class="field" placeholder="省份" value="{{form.provinceName}}" data-key="provinceName" bindinput="onInput" />
+    <input class="field" placeholder="城市" value="{{form.cityName}}" data-key="cityName" bindinput="onInput" />
+    <input class="field" placeholder="区县" value="{{form.districtName}}" data-key="districtName" bindinput="onInput" />
+    <input class="field" placeholder="详细地址" value="{{form.detail}}" data-key="detail" bindinput="onInput" />
+    <button class="primary-btn" bindtap="save">保存为默认地址</button>
+  </view>
+
+  <view wx:if="{{list.length === 0}}" class="empty">暂无地址</view>
+  <view wx:for="{{list}}" wx:key="id" class="address-card">
+    <view class="card-head">
+      <view class="name">{{item.consignee}} {{item.phone}}</view>
+      <view wx:if="{{item.defaultStatus === 1}}" class="tag">默认</view>
+    </view>
+    <view class="muted">{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.detail}}</view>
+    <view class="actions">
+      <button class="small-btn" bindtap="setDefault" data-id="{{item.id}}">设为默认</button>
+      <button class="small-btn danger" bindtap="remove" data-id="{{item.id}}">删除</button>
+    </view>
+  </view>
+</view>

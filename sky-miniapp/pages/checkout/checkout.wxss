@@ -1,0 +1,62 @@
+.checkout-page {
+  padding-bottom: 150rpx;
+}
+
+.section {
+  margin-bottom: 20rpx;
+  padding: 22rpx;
+  border-radius: 8rpx;
+  background: #fff;
+}
+
+.section-title {
+  margin-bottom: 18rpx;
+  color: #102820;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.address-name {
+  margin-bottom: 8rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  padding: 14rpx 0;
+  font-size: 27rpx;
+}
+
+.remark {
+  height: 72rpx;
+  padding: 0 16rpx;
+  border-radius: 8rpx;
+  background: #f6f7f8;
+  font-size: 28rpx;
+}
+
+.submit-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22rpx 24rpx;
+  background: #fff;
+  box-shadow: 0 -6rpx 18rpx rgba(16, 40, 32, 0.08);
+}
+
+.total {
+  color: #d24734;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.submit-btn {
+  width: 280rpx;
+  margin: 0;
+}

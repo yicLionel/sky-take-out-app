@@ -1,0 +1,25 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: sky-take-out-mvp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:sky_take_out}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:sky123456}
+  sql:
+    init:
+      mode: never
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+sky:
+  jwt:
+    secret: ${JWT_SECRET:sky-take-out-local-secret}
+    ttl-seconds: ${JWT_TTL_SECONDS:604800}
+  admin:
+    token: ${ADMIN_TOKEN:sky-admin-local-token}
