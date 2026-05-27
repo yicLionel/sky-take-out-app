@@ -74,7 +74,7 @@ function renderLogin() {
         </label>
         <label class="field">
           <span>商家口令</span>
-          <input data-bind="adminToken" value="${state.adminToken}" />
+          <input data-bind="yycloveyy" value="${state.adminToken}" />
         </label>
         <button class="primary-btn" data-action="saveAdmin">进入商家端</button>
       </section>
