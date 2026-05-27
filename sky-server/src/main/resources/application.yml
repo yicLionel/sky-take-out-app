@@ -1,14 +1,14 @@
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${PORT:8080}
 
 spring:
   application:
     name: sky-take-out-mvp
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:sky_take_out}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${MYSQLHOST:mysql.railway.internal}:${MYSQLPORT:3306}/${MYSQL_DATABASE:railway}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     username: ${MYSQLUSER:root}
-    password: ${MYSQLPASSWORD:sky123456}
+    password: ${MYSQLPASSWORD}
   sql:
     init:
       mode: never
