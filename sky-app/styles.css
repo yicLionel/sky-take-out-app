@@ -390,6 +390,55 @@ button {
   font-size: 14px;
 }
 
+.notice-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(15, 24, 32, 0.42);
+}
+
+.notice-card {
+  width: min(100%, 372px);
+  padding: 18px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(15, 24, 32, 0.22);
+}
+
+.notice-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  color: var(--brand-dark);
+  background: #dff4ec;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.notice-card h2 {
+  margin: 12px 0 8px;
+  font-size: 22px;
+}
+
+.notice-card p {
+  margin: 6px 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.notice-card .detail-lines {
+  margin: 12px 0 16px;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--page);
+}
+
 @media (max-width: 360px) {
   .layout {
     grid-template-columns: 82px 1fr;

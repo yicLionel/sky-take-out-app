@@ -2,7 +2,10 @@ const state = {
   baseUrl: localStorage.getItem('skyAdminBaseUrl') || window.SKY_APP_CONFIG?.apiBaseUrl || 'http://localhost:8080',
   adminToken: localStorage.getItem('skyAdminToken') || '',
   orders: [],
-  activeOrder: null
+  activeOrder: null,
+  knownOrderIds: new Set(),
+  pollingStarted: false,
+  notifyOrder: null
 }
 
 if ('serviceWorker' in navigator) {
@@ -15,6 +18,7 @@ if ('serviceWorker' in navigator) {
 
 const admin = document.querySelector('#admin')
 const toast = document.querySelector('#toast')
+let pollTimer = null
 
 document.addEventListener('click', (event) => {
   const action = event.target.closest('[data-action]')
@@ -60,6 +64,42 @@ function showToast(message) {
   }, 1800)
 }
 
+function startOrderPolling() {
+  if (state.pollingStarted) return
+  state.pollingStarted = true
+  clearInterval(pollTimer)
+  pollTimer = setInterval(checkNewOrders, 15000)
+}
+
+function stopOrderPolling() {
+  state.pollingStarted = false
+  clearInterval(pollTimer)
+  pollTimer = null
+}
+
+function rememberOrders(orders) {
+  orders.forEach((order) => state.knownOrderIds.add(Number(order.id)))
+}
+
+function checkNewOrders() {
+  if (!state.adminToken) return
+  api('/admin/order/list')
+    .then((orders) => {
+      const nextOrders = orders || []
+      const newOrders = nextOrders.filter((order) => !state.knownOrderIds.has(Number(order.id)))
+      state.orders = nextOrders
+      rememberOrders(nextOrders)
+      if (newOrders.length) {
+        state.notifyOrder = newOrders[0]
+        renderOrders()
+      }
+    })
+    .catch(() => {
+      stopOrderPolling()
+      renderLogin()
+    })
+}
+
 function statusText(status) {
   if (status === 1) return '待支付'
   if (status === 2) return '已支付'
@@ -68,6 +108,7 @@ function statusText(status) {
 }
 
 function renderLogin() {
+  stopOrderPolling()
   admin.innerHTML = `
     <section class="screen no-tab">
       <header class="topbar">
@@ -96,7 +137,9 @@ function loadOrders() {
   api('/admin/order/list')
     .then((orders) => {
       state.orders = orders || []
+      rememberOrders(state.orders)
       renderOrders()
+      startOrderPolling()
     })
     .catch(() => {
       renderLogin()
@@ -154,7 +197,29 @@ function renderOrders() {
           </article>
         `).join('') : '<div class="empty">暂无订单</div>'}
       </section>
+      ${state.notifyOrder ? renderOrderNotice(state.notifyOrder) : ''}
     </section>
+  `
+}
+
+function renderOrderNotice(order) {
+  return `
+    <div class="notice-backdrop">
+      <section class="notice-card" role="dialog" aria-modal="true" aria-label="新订单提醒">
+        <div class="notice-badge">新订单</div>
+        <h2>有朋友刚刚下单</h2>
+        <p>${order.consignee || '顾客'} ${order.phone || ''}</p>
+        <p>${order.address || ''}</p>
+        <div class="detail-lines">
+          ${(order.orderDetails || []).map((item) => `
+            <div class="detail-line">
+              <span>${item.name} x${item.number}</span>
+            </div>
+          `).join('')}
+        </div>
+        <button class="primary-btn" data-action="closeNotice">知道了</button>
+      </section>
+    </div>
   `
 }
 
@@ -166,6 +231,10 @@ const actions = {
   },
   refresh() {
     loadOrders()
+  },
+  closeNotice() {
+    state.notifyOrder = null
+    renderOrders()
   },
   setStatus(dataset) {
     api(`/admin/order/${dataset.id}/status?status=${dataset.status}`, { method: 'POST' })
