@@ -5,7 +5,8 @@ const state = {
   activeOrder: null,
   knownOrderIds: new Set(),
   pollingStarted: false,
-  notifyOrder: null
+  notifyOrder: null,
+  deleteOrder: null
 }
 
 if ('serviceWorker' in navigator) {
@@ -192,12 +193,14 @@ function renderOrders() {
               <span>
                 <button class="ghost-btn" data-action="setStatus" data-id="${order.id}" data-status="3">完成</button>
                 <button class="danger-btn" data-action="setStatus" data-id="${order.id}" data-status="4">取消</button>
+                <button class="danger-btn" data-action="confirmDelete" data-id="${order.id}">删除</button>
               </span>
             </div>
           </article>
         `).join('') : '<div class="empty">暂无订单</div>'}
       </section>
       ${state.notifyOrder ? renderOrderNotice(state.notifyOrder) : ''}
+      ${state.deleteOrder ? renderDeleteConfirm(state.deleteOrder) : ''}
     </section>
   `
 }
@@ -223,6 +226,24 @@ function renderOrderNotice(order) {
   `
 }
 
+function renderDeleteConfirm(order) {
+  return `
+    <div class="notice-backdrop">
+      <section class="notice-card" role="dialog" aria-modal="true" aria-label="删除订单确认">
+        <div class="notice-badge danger">删除订单</div>
+        <h2>确认删除这笔订单？</h2>
+        <p>${order.number}</p>
+        <p>${order.consignee || ''} ${order.phone || ''}</p>
+        <p>${order.address || ''}</p>
+        <div class="confirm-actions">
+          <button class="ghost-btn" data-action="cancelDelete">取消</button>
+          <button class="danger-btn" data-action="deleteOrder" data-id="${order.id}">确认删除</button>
+        </div>
+      </section>
+    </div>
+  `
+}
+
 const actions = {
   saveAdmin() {
     localStorage.setItem('skyAdminBaseUrl', state.baseUrl)
@@ -235,6 +256,23 @@ const actions = {
   closeNotice() {
     state.notifyOrder = null
     renderOrders()
+  },
+  confirmDelete(dataset) {
+    state.deleteOrder = state.orders.find((order) => Number(order.id) === Number(dataset.id)) || null
+    renderOrders()
+  },
+  cancelDelete() {
+    state.deleteOrder = null
+    renderOrders()
+  },
+  deleteOrder(dataset) {
+    api(`/admin/order/${dataset.id}`, { method: 'DELETE' })
+      .then(() => {
+        state.deleteOrder = null
+        state.knownOrderIds.delete(Number(dataset.id))
+        showToast('已删除')
+        loadOrders()
+      })
   },
   setStatus(dataset) {
     api(`/admin/order/${dataset.id}/status?status=${dataset.status}`, { method: 'POST' })

@@ -7,6 +7,7 @@ import com.sky.result.Result;
 import com.sky.service.OrderService;
 import com.sky.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,14 @@ public class AdminOrderController {
                                        @RequestHeader(value = "X-Admin-Token", required = false) String token) {
         checkToken(token);
         orderService.adminUpdateStatus(id, status);
+        return Result.success();
+    }
+
+    @DeleteMapping("/{id}")
+    public Result<String> delete(@PathVariable Long id,
+                                 @RequestHeader(value = "X-Admin-Token", required = false) String token) {
+        checkToken(token);
+        orderService.adminDelete(id);
         return Result.success();
     }
 

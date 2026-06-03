@@ -166,6 +166,16 @@ public class OrderService {
         orderMapper.updateStatus(id, status);
     }
 
+    @Transactional
+    public void adminDelete(Long id) {
+        Orders orders = orderMapper.getById(id);
+        if (orders == null) {
+            throw new BaseException(MessageConstant.ORDER_NOT_FOUND);
+        }
+        orderDetailMapper.deleteByOrderId(id);
+        orderMapper.deleteById(id);
+    }
+
     private OrderVO toVO(Orders orders) {
         OrderVO vo = new OrderVO();
         vo.id = orders.id;

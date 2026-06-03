@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Delete;
 
 import java.util.List;
 
@@ -20,4 +21,7 @@ public interface OrderDetailMapper {
 
     @Select("select * from order_detail where order_id = #{orderId} order by id asc")
     List<OrderDetail> listByOrderId(@Param("orderId") Long orderId);
+
+    @Delete("delete from order_detail where order_id = #{orderId}")
+    void deleteByOrderId(@Param("orderId") Long orderId);
 }

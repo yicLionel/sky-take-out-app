@@ -1,6 +1,7 @@
 package com.sky.mapper;
 
 import com.sky.entity.Orders;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
@@ -46,4 +47,7 @@ public interface OrderMapper {
 
     @Update("update `orders` set status = #{status} where id = #{id}")
     void updateStatus(@Param("id") Long id, @Param("status") Integer status);
+
+    @Delete("delete from `orders` where id = #{id}")
+    void deleteById(@Param("id") Long id);
 }
